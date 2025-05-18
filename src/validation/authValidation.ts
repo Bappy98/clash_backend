@@ -9,3 +9,8 @@ export const registrationSchema = z.object({
     message: "Passwords do not match",
     path: ["confirmPassword"],
 });
+
+export const loginSchema = z.object({
+    email: z.string({message: "Email is required"}).email({message: "Invalid email format"}),
+    password: z.string({message: "Password is required"}),
+});
