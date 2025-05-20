@@ -5,10 +5,11 @@ import { formatError } from "../helper.js";
 import prisma from './../config/db.config.js';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { authLimiter } from "../config/rateLimit.js";
 
 const router = Router();
 
-router.post('/register',async (req: Request, res: Response) => {
+router.post('/register', authLimiter,async (req: Request, res: Response) => {
     try {
         const body = req.body;
         const payload = registrationSchema.parse(body);
@@ -52,7 +53,7 @@ router.post('/register',async (req: Request, res: Response) => {
     }
 })
 
-router.post("/login", async (req: Request, res: Response) => {
+router.post("/login",authLimiter, async (req: Request, res: Response) => {
     try {
        const body = req.body;
 
