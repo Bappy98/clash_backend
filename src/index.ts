@@ -4,6 +4,7 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 import ejs from 'ejs'
 import router from './routes/index.js';
+import ExpressFileUpload from 'express-fileupload';
 import { appLimiter } from './config/rateLimit.js';
 
 
@@ -16,8 +17,13 @@ console.log(__dirname);
 
 
 app.use(express.json())
+app.use(ExpressFileUpload({
+    useTempFiles: true,
+    tempFileDir:"/tmp/"
+}))
 app.use(appLimiter)
 app.use(express.urlencoded({extended:false}))
+app.use(express.static('public/images'))
 
 
 // // Set view engine
