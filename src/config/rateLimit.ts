@@ -8,7 +8,7 @@ export const appLimiter = rateLimit({
 });
 export const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 30, 
+    max: 300, 
     standardHeaders:'draft-08',
     legacyHeaders: false
 });
