@@ -184,59 +184,6 @@ router.post('/items',auth,async(req:Request,res:Response):Promise<any> =>{
     }
 })
 
-// router.post('/items', auth, async (req: Request, res: Response): Promise<any> => {
-//     try {
-//         const { id } = req.body;
-//         const files = req.files as FileArray | undefined;
-//         console.log(files);
-        
-
-//         let imgError: string[] = [];
-//         const images = files?.['images[]'];
-
-//         if (!images || (Array.isArray(images) && images.length < 1)) {
-//             return res.status(400).json({ message: 'At least one image is required.' });
-//         }
-
-//         const imageArray: UploadedFile[] = Array.isArray(images) ? images : [images];
-
-//         if (imageArray.length < 1 || imageArray.length > 2) {
-//             return res.status(422).json({ message: 'Please upload 1 or 2 images only.' });
-//         }
-
-//         imageArray.forEach((img) => {
-//             const validMsg = imageValidator(img.size, img.mimetype);
-//             if (validMsg) imgError.push(validMsg);
-//         });
-
-//         if (imgError.length > 0) {
-//             return res.status(422).json({ errors: { images: imgError } });
-//         }
-
-//         const uploadImages: string[] = await Promise.all(
-//             imageArray.map((img) => uploadImage(img))
-//         );
-
-//         await prisma.clashItem.createMany({
-//             data: uploadImages.map((img) => ({
-//                 image: img,
-//                 clash_id: Number(id)
-//             }))
-//         });
-
-//         return res.status(201).json({
-//             message: 'Items added successfully'
-//         });
-
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({
-//             message: 'Internal server error',
-//             error
-//         });
-//     }
-// });
-
 router.delete('/:id',auth,async(req:Request,res:Response):Promise<any> =>{
   try {
     const id = Number(req.params.id)
@@ -290,10 +237,6 @@ router.delete('/:id',auth,async(req:Request,res:Response):Promise<any> =>{
     })
   }
 })
-
-
-
-
 
 
 export default router
